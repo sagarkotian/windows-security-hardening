@@ -1,0 +1,13 @@
+# Generated security posture data can contain sensitive configuration details.
+Backups/
+Reports/
+TestReports/
+
+# Local editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.tmp
+*.log

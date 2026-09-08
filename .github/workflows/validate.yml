@@ -1,0 +1,36 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  powershell-syntax:
+    name: PowerShell syntax
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Parse script with Windows PowerShell 5.1
+        shell: powershell
+        run: |
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+              (Resolve-Path '.\WindowsSecurityTUI.ps1'),
+              [ref]$tokens,
+              [ref]$errors
+          ) | Out-Null
+
+          if ($errors.Count -gt 0) {
+              $errors | Format-List Message, Extent, ErrorId
+              throw "PowerShell parser found $($errors.Count) error(s)."
+          }
+
+          Write-Host 'WindowsSecurityTUI.ps1 parsed successfully.'
