@@ -1,5 +1,7 @@
 # Personal Windows Security TUI
 
+[![Validate](https://github.com/sagarkotian/windows-security-hardening/actions/workflows/validate.yml/badge.svg)](https://github.com/sagarkotian/windows-security-hardening/actions/workflows/validate.yml)
+
 `WindowsSecurityTUI.ps1` is an interactive, dependency-free PowerShell console for auditing a personal Windows 11 PC against a focused set of high-value controls. Each failed control explains:
 
 - why the setting matters;
